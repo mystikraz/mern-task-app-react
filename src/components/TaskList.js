@@ -24,7 +24,7 @@ const TaskList = () => {
   const getTasks = async () => {
     setIsLoading(true)
     try {
-      const { data } = await axios.get(`${URL}/v1/tasks/`)
+      const { data } = await axios.get(`${URL}/api/v1/tasks/`)
       setTasks(data)
       setIsLoading(false)
     } catch (error) {
@@ -51,7 +51,7 @@ const TaskList = () => {
       return toast.error("Input field cannot be empty");
     }
     try {
-      await axios.post(`${URL}/v1/tasks/`, formData)
+      await axios.post(`${URL}/api/v1/tasks/`, formData)
       toast.success("Task added successfully")
       setFormData({ ...formData, name: "" })
       getTasks()
@@ -62,7 +62,7 @@ const TaskList = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`${URL}/v1/task/${id}`)
+      await axios.delete(`${URL}/api/v1/task/${id}`)
       getTasks()
     } catch (error) {
       toast.error(error.message)
@@ -80,7 +80,7 @@ const TaskList = () => {
       return toast.error("Input field cannot be empty")
     }
     try {
-      await axios.put(`${URL}/v1/task/${taskID}`, formData)
+      await axios.put(`${URL}/api/v1/task/${taskID}`, formData)
       setFormData({ ...formData, name: "" })
       getTasks()
       setIsEditing(false)
@@ -95,7 +95,7 @@ const TaskList = () => {
       completed: true
     }
     try {
-      await axios.put(`${URL}/v1/task/${task._id}`, newFormData)
+      await axios.put(`${URL}/api/v1/task/${task._id}`, newFormData)
       getTasks()
     } catch (error) {
       toast.error(error.message)
